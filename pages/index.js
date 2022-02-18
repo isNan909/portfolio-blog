@@ -1,10 +1,12 @@
 import Head from 'next/head';
-import Footer from '@/components/footer';
-import { Button, Heading } from '@chakra-ui/react';
+import { api_endpoint } from '@/constants/index';
+import { GraphQLClient, gql } from 'graphql-request';
 
+import Footer from '@/components/footer';
 import styles from '@/styles/Home.module.css';
 
-const Home = () => {
+const Home = ({ data }) => {
+  console.log(data);
   return (
     <div className={styles.container}>
       <Head>
@@ -14,13 +16,21 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        <Heading as="h3" size="lg">
-          In ❤️ with React & Next with Chakra UI
-        </Heading>
-        <br />
-        <Button size="lg" colorScheme="green" mt="24px">
-          Let's get started
-        </Button>
+        <div>
+          <span>Blogs</span>
+          {data?.blogs?.map(item => (
+            <div key={item.slug}>{item.title}</div>
+          ))}
+        </div>
+        <div>
+          <span>Case Studies</span>
+          {data?.case_studies?.map(item => (
+            <div key={item.slug}>
+              {item.title}
+              {item.subheading}
+            </div>
+          ))}
+        </div>
       </main>
       <Footer />
     </div>
@@ -28,3 +38,36 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getStaticProps = async () => {
+  const graphQLClient = new GraphQLClient(api_endpoint);
+  const query = gql`
+    {
+      blogs(first: 4, orderBy: updatedAt_DESC) {
+        title
+        date
+        tags
+        slug
+        content
+        bannerImage {
+          url
+        }
+      }
+      case_studies(first: 4, orderBy: updatedAt_DESC) {
+        title
+        tags
+        subheading
+        slug
+        bannerImage {
+          url
+        }
+      }
+    }
+  `;
+  const response = await graphQLClient.request(query);
+  return {
+    props: {
+      data: response
+    }
+  };
+};
