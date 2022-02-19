@@ -1,10 +1,12 @@
+import he from 'he';
 import Head from 'next/head';
 import Image from 'next/image';
+import hydrate from 'next-mdx-remote/hydrate';
 import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
-import he from 'he';
+
+import '@/styles/Blogdetail.module.css';
 
 const MyBlog = ({ singleBlog, content }) => {
   const router = useRouter();
