@@ -2,8 +2,11 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
+import renderToString from 'next-mdx-remote/render-to-string';
+import hydrate from 'next-mdx-remote/hydrate';
+import he from 'he';
 
-const MyBlog = ({ singleBlog }) => {
+const MyBlog = ({ singleBlog, content }) => {
   const router = useRouter();
   if (router.isFallback) return <>Loading...</>;
   return (
@@ -22,6 +25,8 @@ const MyBlog = ({ singleBlog }) => {
             height={singleBlog.blogs[0].bannerImage.height}
           />
           <div>{singleBlog.blogs[0].title}</div>
+          <div>{new Date(singleBlog.blogs[0].date).toDateString()}</div>
+          <div> {hydrate(content)}</div>
           <small>
             {singleBlog.blogs[0].tags.map((item, index) => (
               <div key={index}>
@@ -41,7 +46,8 @@ export const getStaticProps = async ({ params }) => {
   const singleBlog = await getSingleBlog(params.slug);
   return {
     props: {
-      singleBlog
+      singleBlog,
+      content: await renderToString(he.decode(singleBlog.blogs[0].content))
     }
   };
 };

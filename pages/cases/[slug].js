@@ -2,10 +2,14 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getSingleCase, getCaseSlugs } from '@/lib/data';
+import renderToString from 'next-mdx-remote/render-to-string';
+import hydrate from 'next-mdx-remote/hydrate';
+import he from 'he';
 
-const MyCase = ({ singleCase }) => {
+const MyCase = ({ singleCase, content }) => {
   const router = useRouter();
   if (router.isFallback) return <>Loading...</>;
+  // console.log(singleCase);
   return (
     <div>
       <Head>
@@ -22,6 +26,7 @@ const MyCase = ({ singleCase }) => {
               width={singleCase.case_studies[0].bannerImage.width}
               height={singleCase.case_studies[0].bannerImage.height}
             />
+            <div>{hydrate(content)}</div>
             {singleCase.case_studies[0].title}
             {singleCase.case_studies[0].subheading}
           </div>
@@ -37,7 +42,10 @@ export const getStaticProps = async ({ params }) => {
   const singleCase = await getSingleCase(params.slug);
   return {
     props: {
-      singleCase
+      singleCase,
+      content: await renderToString(
+        he.decode(singleCase.case_studies[0].content)
+      )
     }
   };
 };
