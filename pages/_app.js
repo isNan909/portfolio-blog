@@ -1,10 +1,12 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Container } from '@chakra-ui/react';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <Container maxW="container.md">
+        <Component {...pageProps} />
+      </Container>
     </ChakraProvider>
   );
 };

@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+pre,
+code {
+  background: #27335a;
+  border-radius: 0.5rem;
+  color: rgb(227, 227, 227);
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
