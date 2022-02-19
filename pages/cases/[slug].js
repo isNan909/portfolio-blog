@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { getSingleCase } from '@/lib/data';
+import { getSingleCase, getCaseSlugs } from '@/lib/data';
 
 const MyCase = ({ singleCase }) => {
   const router = useRouter();
@@ -16,6 +17,11 @@ const MyCase = ({ singleCase }) => {
         <div>
           <span>Single Cases</span>
           <div>
+            <Image
+              src={singleCase.case_studies[0].bannerImage.url}
+              width={singleCase.case_studies[0].bannerImage.width}
+              height={singleCase.case_studies[0].bannerImage.height}
+            />
             {singleCase.case_studies[0].title}
             {singleCase.case_studies[0].subheading}
           </div>
@@ -36,9 +42,13 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+  const caseSlugs = await getCaseSlugs();
+  const slugPaths = caseSlugs.case_studies.map(slug => ({
+    params: { slug: slug.slug }
+  }));
   return {
-    paths: [],
+    paths: slugPaths,
     fallback: true
   };
 };

@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { getSingleBlog } from '@/lib/data';
+import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 
 const MyBlog = ({ singleBlog }) => {
   const router = useRouter();
@@ -15,7 +16,19 @@ const MyBlog = ({ singleBlog }) => {
       <main>
         <div>
           <span>Single Blog</span>
+          <Image
+            src={singleBlog.blogs[0].bannerImage.url}
+            width={singleBlog.blogs[0].bannerImage.width}
+            height={singleBlog.blogs[0].bannerImage.height}
+          />
           <div>{singleBlog.blogs[0].title}</div>
+          <small>
+            {singleBlog.blogs[0].tags.map((item, index) => (
+              <div key={index}>
+                <span>{item}</span>
+              </div>
+            ))}
+          </small>
         </div>
       </main>
     </div>
@@ -33,9 +46,13 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+  const blogSlugs = await getBlogSlugs();
+  const slugPaths = blogSlugs.blogs.map(slug => ({
+    params: { slug: slug.slug }
+  }));
   return {
-    paths: [],
+    paths: slugPaths,
     fallback: true
   };
 };
