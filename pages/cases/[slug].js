@@ -9,7 +9,6 @@ import renderToString from 'next-mdx-remote/render-to-string';
 const MyCase = ({ singleCase, content }) => {
   const router = useRouter();
   if (router.isFallback) return <>Loading...</>;
-  // console.log(singleCase);
   return (
     <div>
       <Head>
@@ -19,7 +18,6 @@ const MyCase = ({ singleCase, content }) => {
       </Head>
       <main>
         <div>
-          <span>Single Cases</span>
           <div>
             <Image
               src={singleCase.case_studies[0].bannerImage.url}

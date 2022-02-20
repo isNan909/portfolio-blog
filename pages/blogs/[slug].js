@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
 
+import { Stack, Box } from '@chakra-ui/react';
 import '@/styles/Blogdetail.module.css';
 
 const MyBlog = ({ singleBlog, content }) => {
@@ -24,24 +25,36 @@ const MyBlog = ({ singleBlog, content }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <span>Single Blog</span>
+        <Stack
+          as={Box}
+          textAlign={'left'}
+          spacing={{ base: 8, md: 10 }}
+          py={{ base: 20, md: 36 }}
+        >
           <Image
             src={singleBlog.blogs[0].bannerImage.url}
             width={singleBlog.blogs[0].bannerImage.width}
             height={singleBlog.blogs[0].bannerImage.height}
           />
-          <div>{singleBlog.blogs[0].title}</div>
-          <div>{new Date(singleBlog.blogs[0].date).toDateString()}</div>
-          <div> {hydrate(content)}</div>
-          <small>
-            {singleBlog.blogs[0].tags.map((item, index) => (
-              <div key={index}>
-                <span>{item}</span>
-              </div>
-            ))}
-          </small>
-        </div>
+          <Box>
+            <Box
+              mt="1"
+              fontWeight="bold"
+              as="h4"
+              fontSize={'3xl'}
+              lineHeight="tight"
+              isTruncated
+            >
+              {singleBlog.blogs[0].title}
+            </Box>
+
+            <Box fontSize={'sm'}>
+              {new Date(singleBlog.blogs[0].date).toDateString()}
+            </Box>
+          </Box>
+
+          <Box>{hydrate(content)}</Box>
+        </Stack>
       </main>
     </div>
   );
