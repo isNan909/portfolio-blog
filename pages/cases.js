@@ -6,7 +6,7 @@ import { getCases } from '@/lib/data';
 import styles from '@/styles/Home.module.css';
 import { Box, Link, Stack, Heading, Text } from '@chakra-ui/react';
 
-const MyCases = ({ data }) => {
+const MyCases = ({ cases }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +20,7 @@ const MyCases = ({ data }) => {
           <Heading as="h3" mt="6">
             Case Studies
           </Heading>
-          {data?.case_studies?.map((item, index) => (
+          {cases?.case_studies?.map((item, index) => (
             <Box key={index}>
               <Stack
                 as={Box}
@@ -106,7 +106,7 @@ export const getStaticProps = async () => {
   const data = await getCases();
   return {
     props: {
-      data
+      cases: data
     }
   };
 };

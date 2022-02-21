@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { request } from 'graphql-request';
 import useSWR from 'swr';
+import { request } from 'graphql-request';
 import { api_endpoint } from '@/constants/index';
 import { Button, Box, Stack, Link, Heading } from '@chakra-ui/react';
 
-import styles from '@/styles/Home.module.css';
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi';
+import styles from '@/styles/Home.module.css';
 
 const fetchData = (endpoint, query, variables) =>
   request(endpoint, query, variables);
@@ -140,7 +140,7 @@ export const getStaticProps = async () => {
           node {
             title
             date
-            tags
+            tags 
             slug
             content
             bannerImage {
