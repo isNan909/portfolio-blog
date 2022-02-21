@@ -18,10 +18,6 @@ const MyBlog = ({ singleBlog, content }) => {
       <Head>
         <title>Personal Website | A Blog</title>
         <meta name="description" content="Personal Website | A Blog" />
-        <link
-          rel="stylesheet"
-          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/default.min.css"
-        ></link>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
