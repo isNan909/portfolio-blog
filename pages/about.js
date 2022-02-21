@@ -1,8 +1,14 @@
+import Head from 'next/head';
 import { Heading, Stack, Text, Box } from '@chakra-ui/react';
 
 const About = () => {
   return (
     <>
+      <Head>
+        <title>Personal Website | About Me</title>
+        <meta name="description" content="Personal Website | Blogs" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Stack
         as={Box}
         textAlign={'left'}

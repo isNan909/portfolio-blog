@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { request } from 'graphql-request';
 import useSWR from 'swr';
 import { api_endpoint } from '@/constants/index';
-import { Button, Box, Stack, Link } from '@chakra-ui/react';
+import { Button, Box, Stack, Link, Heading } from '@chakra-ui/react';
 
 import styles from '@/styles/Home.module.css';
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi';
@@ -54,6 +54,7 @@ const MyBlogs = ({ blogs }) => {
       </Head>
 
       <main className={styles.main}>
+        <Heading as="h3">My Blogs</Heading>
         <div>
           <Stack
             as={Box}
@@ -77,7 +78,7 @@ const MyBlogs = ({ blogs }) => {
                     </Box>
 
                     <Box fontSize={'sm'}>
-                      {new Date(item.date).toDateString()}
+                      {new Date(item.node.date).toDateString()}
                     </Box>
                   </Box>
                 </Link>

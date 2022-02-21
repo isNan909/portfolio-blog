@@ -1,10 +1,13 @@
 import he from 'he';
 import Head from 'next/head';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import hydrate from 'next-mdx-remote/hydrate';
 import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
+import { HiArrowNarrowLeft } from 'react-icons/hi';
+import { Box, Button, Heading } from '@chakra-ui/react';
 
 const MyBlog = ({ singleBlog, content }) => {
   const router = useRouter();
@@ -23,14 +26,22 @@ const MyBlog = ({ singleBlog, content }) => {
       </Head>
       <main>
         <div>
+          <NextLink href={`/blogs`} passHref>
+            <Button leftIcon={<HiArrowNarrowLeft />}>Go back</Button>
+          </NextLink>
           <Image
             src={singleBlog.blogs[0].bannerImage.url}
             width={singleBlog.blogs[0].bannerImage.width}
             height={singleBlog.blogs[0].bannerImage.height}
           />
-          <div>{singleBlog.blogs[0].title}</div>
-          <div>{new Date(singleBlog.blogs[0].date).toDateString()}</div>
-          <div> {hydrate(content)}</div>
+          <Heading as="h3" mt="6">
+            {singleBlog.blogs[0].title}
+          </Heading>
+
+          <Box my="5" fontWeight="bold">
+            {new Date(singleBlog.blogs[0].date).toDateString()}
+          </Box>
+          <Box mt="6"> {hydrate(content)}</Box>
           <small>
             {singleBlog.blogs[0].tags.map((item, index) => (
               <div key={index}>

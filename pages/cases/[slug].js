@@ -2,9 +2,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import he from 'he';
 import hydrate from 'next-mdx-remote/hydrate';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { getSingleCase, getCaseSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
+import { Box, Button, Heading, Link } from '@chakra-ui/react';
+import { HiArrowNarrowLeft } from 'react-icons/hi';
 
 const MyCase = ({ singleCase, content }) => {
   const router = useRouter();
@@ -19,14 +22,24 @@ const MyCase = ({ singleCase, content }) => {
       <main>
         <div>
           <div>
+            <Box>
+              <NextLink href={`/cases`} passHref>
+                <Link>
+                  <Button leftIcon={<HiArrowNarrowLeft />}>Go back</Button>
+                </Link>
+              </NextLink>
+            </Box>
             <Image
               src={singleCase.case_studies[0].bannerImage.url}
               width={singleCase.case_studies[0].bannerImage.width}
               height={singleCase.case_studies[0].bannerImage.height}
             />
-            <div>{hydrate(content)}</div>
-            {singleCase.case_studies[0].title}
+            <Heading as="h3" mt="6">
+              {singleCase.case_studies[0].title}
+            </Heading>
+            <br />
             {singleCase.case_studies[0].subheading}
+            <Box pt="12">{hydrate(content)}</Box>
           </div>
         </div>
       </main>
