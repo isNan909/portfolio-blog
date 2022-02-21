@@ -3,19 +3,19 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   env: {
     browser: true,
     node: true,
-    es6: true,
+    es6: true
   },
   settings: {
     react: {
-      version: 'detect',
-    },
+      version: 'detect'
+    }
   },
   extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier']
 };

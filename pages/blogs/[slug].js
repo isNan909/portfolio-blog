@@ -6,6 +6,9 @@ import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
 
+import { Stack, Box } from '@chakra-ui/react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import '@/styles/Blogdetail.module.css';
 
 const MyBlog = ({ singleBlog, content }) => {
@@ -14,6 +17,7 @@ const MyBlog = ({ singleBlog, content }) => {
 
   return (
     <div>
+      <Navbar />
       <Head>
         <title>Personal Website | A Blog</title>
         <meta name="description" content="Personal Website | A Blog" />
@@ -43,6 +47,7 @@ const MyBlog = ({ singleBlog, content }) => {
           </small>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

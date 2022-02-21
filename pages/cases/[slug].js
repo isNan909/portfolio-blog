@@ -6,12 +6,16 @@ import { useRouter } from 'next/router';
 import { getSingleCase, getCaseSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
 
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+
 const MyCase = ({ singleCase, content }) => {
   const router = useRouter();
   if (router.isFallback) return <>Loading...</>;
   // console.log(singleCase);
   return (
     <div>
+      <Navbar />
       <Head>
         <title>Personal Website | A Case</title>
         <meta name="description" content="Personal Website | A Case" />
@@ -32,6 +36,7 @@ const MyCase = ({ singleCase, content }) => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
