@@ -8,6 +8,7 @@ import { Button, Box, Stack, Link, Heading } from '@chakra-ui/react';
 
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi';
 import styles from '@/styles/Home.module.css';
+import Image from 'next/image';
 
 const fetchData = (endpoint, query, variables) =>
   request(endpoint, query, variables);
@@ -28,6 +29,8 @@ const MyBlogs = ({ blogs }) => {
               content
               bannerImage {
                 url
+                width
+                height
               }
             }
           }
@@ -65,6 +68,11 @@ const MyBlogs = ({ blogs }) => {
             {data?.blogsConnection?.edges.map((item, index) => (
               <NextLink key={index} href={`/blogs/${item.node.slug}`} passHref>
                 <Link>
+                  <Image
+                    src={item.node.bannerImage.url}
+                    width={item.node.bannerImage.width}
+                    height={item.node.bannerImage.height}
+                  />
                   <Box>
                     <Box
                       mt="1"
@@ -145,6 +153,8 @@ export const getStaticProps = async () => {
             content
             bannerImage {
               url
+              width
+              height
             }
           }
         }
