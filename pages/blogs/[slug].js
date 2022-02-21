@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
 import { HiArrowNarrowLeft } from 'react-icons/hi';
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading, Link } from '@chakra-ui/react';
 
 const MyBlog = ({ singleBlog, content }) => {
   const router = useRouter();
@@ -27,7 +27,9 @@ const MyBlog = ({ singleBlog, content }) => {
       <main>
         <div>
           <NextLink href={`/blogs`} passHref>
-            <Button leftIcon={<HiArrowNarrowLeft />}>Go back</Button>
+            <Link>
+              <Button leftIcon={<HiArrowNarrowLeft />}>Go back</Button>
+            </Link>
           </NextLink>
           <Image
             src={singleBlog.blogs[0].bannerImage.url}

@@ -150,7 +150,7 @@ export const getStaticProps = async () => {
         }
         pageInfo {
           hasNextPage
-          hasPreviousPage
+          hasPreviousPage 
           pageSize
         }
       }
