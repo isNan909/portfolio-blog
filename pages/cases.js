@@ -4,14 +4,11 @@ import Image from 'next/image';
 import { getCases } from '@/lib/data';
 
 import styles from '@/styles/Home.module.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Box, Link, Stack, Heading, Text } from '@chakra-ui/react';
 
 const MyCases = ({ data }) => {
   return (
     <div className={styles.container}>
-      <Navbar />
       <Head>
         <title>Personal Website | Cases</title>
         <meta name="description" content="Personal Website | Cases" />
@@ -99,7 +96,6 @@ const MyCases = ({ data }) => {
           ))}
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

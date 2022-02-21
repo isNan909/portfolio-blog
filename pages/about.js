@@ -1,11 +1,8 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Heading, Stack, Text, Box } from '@chakra-ui/react';
 
 const About = () => {
   return (
     <>
-      <Navbar />
       <Stack
         as={Box}
         textAlign={'left'}
@@ -45,7 +42,6 @@ const About = () => {
           position={'relative'}
         ></Stack>
       </Stack>
-      <Footer />
     </>
   );
 };

@@ -6,8 +6,6 @@ import useSWR from 'swr';
 import { api_endpoint } from '@/constants/index';
 import { Button, Box, Stack, Link } from '@chakra-ui/react';
 
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import styles from '@/styles/Home.module.css';
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi';
 
@@ -49,7 +47,6 @@ const MyBlogs = ({ blogs }) => {
 
   return (
     <div className={styles.container}>
-      <Navbar />
       <Head>
         <title>Personal Website | Blogs</title>
         <meta name="description" content="Personal Website | Blogs" />
@@ -126,7 +123,6 @@ const MyBlogs = ({ blogs }) => {
         </div>
         {error && <div>Failed to load</div>}
       </main>
-      <Footer />
     </div>
   );
 };

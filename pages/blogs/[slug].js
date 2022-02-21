@@ -6,18 +6,12 @@ import { useRouter } from 'next/router';
 import { getSingleBlog, getBlogSlugs } from '@/lib/data';
 import renderToString from 'next-mdx-remote/render-to-string';
 
-import { Stack, Box } from '@chakra-ui/react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import '@/styles/Blogdetail.module.css';
-
 const MyBlog = ({ singleBlog, content }) => {
   const router = useRouter();
   if (router.isFallback) return <>Loading...</>;
 
   return (
     <div>
-      <Navbar />
       <Head>
         <title>Personal Website | A Blog</title>
         <meta name="description" content="Personal Website | A Blog" />
@@ -29,7 +23,6 @@ const MyBlog = ({ singleBlog, content }) => {
       </Head>
       <main>
         <div>
-          <span>Single Blog</span>
           <Image
             src={singleBlog.blogs[0].bannerImage.url}
             width={singleBlog.blogs[0].bannerImage.width}
@@ -47,7 +40,6 @@ const MyBlog = ({ singleBlog, content }) => {
           </small>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
